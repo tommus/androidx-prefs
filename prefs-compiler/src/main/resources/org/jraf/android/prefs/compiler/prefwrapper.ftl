@@ -7,7 +7,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 <#if !disableNullable>
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 </#if><#t>
 
 import org.jraf.android.prefs.SharedPreferencesWrapper;
