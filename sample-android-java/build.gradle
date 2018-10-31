@@ -1,0 +1,76 @@
+//region Startup Plugins
+
+apply plugin: "com.android.application"
+
+// endregion
+
+//region Android
+
+android {
+
+  //region Build Configuration
+
+  buildTypes {
+    debug {
+      useProguard false
+      minifyEnabled false
+      shrinkResources false
+      proguardFiles getDefaultProguardFile("proguard-android.txt"),
+          "proguard-rules.pro"
+    }
+    release {
+      useProguard true
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile("proguard-android.txt"),
+          "proguard-rules.pro"
+    }
+  }
+
+  //endregion
+
+  //region Compile Options
+
+  compileSdkVersion 28
+  buildToolsVersion "28.0.3"
+
+  //endregion
+
+  //region Default Config
+
+  defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 28
+    applicationId "co.windly.androidxprefs.sample"
+  }
+
+  //endregion
+}
+
+//endregion
+
+//region Dependencies
+
+dependencies {
+
+  //region Application Modules
+
+  implementation project(":androidx-preferences")
+  annotationProcessor project(":androidx-preferences-compiler")
+
+  //endregion
+
+  //region AndroidX
+
+  implementation "androidx.annotation:annotation:1.0.0"
+
+  //endregion
+
+  //region Material
+
+  implementation "com.google.android.material:material:1.0.0"
+
+  //endregion
+}
+
+//endregion

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <!-- region Application -->
+
+  <string name="app_name">AndroidX Preferences</string>
+
+  <!-- endregion -->
+
+</resources>

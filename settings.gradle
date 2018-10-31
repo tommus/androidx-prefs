@@ -1,4 +1,4 @@
-include ":sample"
-include ":prefs-compiler"
-include ":prefs"
+include ":sample-android-java"
+include ":androidx-preferences-compiler"
+include ":androidx-preferences"
 include ":android-sharedpreferences"

@@ -1,3 +1,5 @@
+//region Build Script
+
 buildscript {
   repositories {
     google()
@@ -10,6 +12,10 @@ buildscript {
   }
 }
 
+//endregion
+
+//region All Projects
+
 allprojects {
   repositories {
     google()
@@ -18,11 +24,16 @@ allprojects {
   }
 }
 
+//endregion
+
+//region Versioning
+
 apply plugin: "com.github.ben-manes.versions"
+
 dependencyUpdates.resolutionStrategy = {
   componentSelection { rules ->
     rules.all { selection ->
-      boolean rejected = [/*"alpha", "beta",*/ "rc", "20050927"].any {
+      boolean rejected = [/*"alpha", "beta",*/ "rc", "20181031"].any {
         qualifier -> selection.candidate.version.toLowerCase() ==~ /.*-${qualifier}.*/
       }
       if (rejected) {
@@ -31,3 +42,5 @@ dependencyUpdates.resolutionStrategy = {
     }
   }
 }
+
+//endregion

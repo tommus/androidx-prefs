@@ -40,313 +40,313 @@ import java.util.Set;
  * @see Context#getSharedPreferences
  */
 public interface SharedPreferences {
+  /**
+   * Interface definition for a callback to be invoked when a shared
+   * preference is changed.
+   */
+  public interface OnSharedPreferenceChangeListener {
     /**
-     * Interface definition for a callback to be invoked when a shared
-     * preference is changed.
+     * Called when a shared preference is changed, added, or removed. This
+     * may be called even if a preference is set to its existing value.
+     *
+     * <p>This callback will be run on your main thread.
+     *
+     * @param sharedPreferences The {@link SharedPreferences} that received
+     * the change.
+     * @param key The key of the preference that was changed, added, or
+     * removed.
      */
-    public interface OnSharedPreferenceChangeListener {
-        /**
-         * Called when a shared preference is changed, added, or removed. This
-         * may be called even if a preference is set to its existing value.
-         *
-         * <p>This callback will be run on your main thread.
-         *
-         * @param sharedPreferences The {@link SharedPreferences} that received
-         * the change.
-         * @param key The key of the preference that was changed, added, or
-         * removed.
-         */
-        void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key);
-    }
+    void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key);
+  }
 
+  /**
+   * Interface used for modifying values in a {@link SharedPreferences}
+   * object.  All changes you make in an editor are batched, and not copied
+   * back to the original {@link SharedPreferences} until you call {@link #commit}
+   * or {@link #apply}
+   */
+  public interface Editor {
     /**
-     * Interface used for modifying values in a {@link SharedPreferences}
-     * object.  All changes you make in an editor are batched, and not copied
-     * back to the original {@link SharedPreferences} until you call {@link #commit}
-     * or {@link #apply}
+     * Set a String value in the preferences editor, to be written back once
+     * {@link #commit} or {@link #apply} are called.
+     *
+     * @param key The name of the preference to modify.
+     * @param value The new value for the preference.  Supplying {@code null}
+     * as the value is equivalent to calling {@link #remove(String)} with
+     * this key.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    public interface Editor {
-        /**
-         * Set a String value in the preferences editor, to be written back once
-         * {@link #commit} or {@link #apply} are called.
-         *
-         * @param key The name of the preference to modify.
-         * @param value The new value for the preference.  Supplying {@code null}
-         * as the value is equivalent to calling {@link #remove(String)} with
-         * this key.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor putString(String key, String value);
-
-        /**
-         * Set a set of String values in the preferences editor, to be written
-         * back once {@link #commit} or {@link #apply} is called.
-         *
-         * @param key The name of the preference to modify.
-         * @param values The set of new values for the preference.  Passing {@code null}
-         * for this argument is equivalent to calling {@link #remove(String)} with
-         * this key.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor putStringSet(String key, Set<String> values);
-
-        /**
-         * Set an int value in the preferences editor, to be written back once
-         * {@link #commit} or {@link #apply} are called.
-         *
-         * @param key The name of the preference to modify.
-         * @param value The new value for the preference.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor putInt(String key, int value);
-
-        /**
-         * Set a long value in the preferences editor, to be written back once
-         * {@link #commit} or {@link #apply} are called.
-         *
-         * @param key The name of the preference to modify.
-         * @param value The new value for the preference.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor putLong(String key, long value);
-
-        /**
-         * Set a float value in the preferences editor, to be written back once
-         * {@link #commit} or {@link #apply} are called.
-         *
-         * @param key The name of the preference to modify.
-         * @param value The new value for the preference.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor putFloat(String key, float value);
-
-        /**
-         * Set a boolean value in the preferences editor, to be written back
-         * once {@link #commit} or {@link #apply} are called.
-         *
-         * @param key The name of the preference to modify.
-         * @param value The new value for the preference.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor putBoolean(String key, boolean value);
-
-        /**
-         * Mark in the editor that a preference value should be removed, which
-         * will be done in the actual preferences once {@link #commit} is
-         * called.
-         *
-         * <p>Note that when committing back to the preferences, all removals
-         * are done first, regardless of whether you called remove before
-         * or after put methods on this editor.
-         *
-         * @param key The name of the preference to remove.
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor remove(String key);
-
-        /**
-         * Mark in the editor to remove <em>all</em> values from the
-         * preferences.  Once commit is called, the only remaining preferences
-         * will be any that you have defined in this editor.
-         *
-         * <p>Note that when committing back to the preferences, the clear
-         * is done first, regardless of whether you called clear before
-         * or after put methods on this editor.
-         *
-         * @return Returns a reference to the same Editor object, so you can
-         * chain put calls together.
-         */
-        Editor clear();
-
-        /**
-         * Commit your preferences changes back from this Editor to the
-         * {@link SharedPreferences} object it is editing.  This atomically
-         * performs the requested modifications, replacing whatever is currently
-         * in the SharedPreferences.
-         *
-         * <p>Note that when two editors are modifying preferences at the same
-         * time, the last one to call commit wins.
-         *
-         * <p>If you don't care about the return value and you're
-         * using this from your application's main thread, consider
-         * using {@link #apply} instead.
-         *
-         * @return Returns true if the new values were successfully written
-         * to persistent storage.
-         */
-        boolean commit();
-
-        /**
-         * Commit your preferences changes back from this Editor to the
-         * {@link SharedPreferences} object it is editing.  This atomically
-         * performs the requested modifications, replacing whatever is currently
-         * in the SharedPreferences.
-         *
-         * <p>Note that when two editors are modifying preferences at the same
-         * time, the last one to call apply wins.
-         *
-         * <p>Unlike {@link #commit}, which writes its preferences out
-         * to persistent storage synchronously, {@link #apply}
-         * commits its changes to the in-memory
-         * {@link SharedPreferences} immediately but starts an
-         * asynchronous commit to disk and you won't be notified of
-         * any failures.  If another editor on this
-         * {@link SharedPreferences} does a regular {@link #commit}
-         * while a {@link #apply} is still outstanding, the
-         * {@link #commit} will block until all async commits are
-         * completed as well as the commit itself.
-         *
-         * <p>As {@link SharedPreferences} instances are singletons within
-         * a process, it's safe to replace any instance of {@link #commit} with
-         * {@link #apply} if you were already ignoring the return value.
-         *
-         * <p>You don't need to worry about Android component
-         * lifecycles and their interaction with <code>apply()</code>
-         * writing to disk.  The framework makes sure in-flight disk
-         * writes from <code>apply()</code> complete before switching
-         * states.
-         *
-         * <p class='note'>The SharedPreferences.Editor interface
-         * isn't expected to be implemented directly.  However, if you
-         * previously did implement it and are now getting errors
-         * about missing <code>apply()</code>, you can simply call
-         * {@link #commit} from <code>apply()</code>.
-         */
-        void apply();
-    }
+    Editor putString(String key, String value);
 
     /**
-     * Retrieve all values from the preferences.
+     * Set a set of String values in the preferences editor, to be written
+     * back once {@link #commit} or {@link #apply} is called.
      *
-     * <p>Note that you <em>must not</em> modify the collection returned
-     * by this method, or alter any of its contents.  The consistency of your
-     * stored data is not guaranteed if you do.
-     *
-     * @return Returns a map containing a list of pairs key/value representing
-     * the preferences.
+     * @param key The name of the preference to modify.
+     * @param values The set of new values for the preference.  Passing {@code null}
+     * for this argument is equivalent to calling {@link #remove(String)} with
+     * this key.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    Map<String, ?> getAll();
+    Editor putStringSet(String key, Set<String> values);
 
     /**
-     * Retrieve a String value from the preferences.
+     * Set an int value in the preferences editor, to be written back once
+     * {@link #commit} or {@link #apply} are called.
      *
-     * @param key The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a String.
+     * @param key The name of the preference to modify.
+     * @param value The new value for the preference.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    String getString(String key, String defValue);
+    Editor putInt(String key, int value);
 
     /**
-     * Retrieve a set of String values from the preferences.
+     * Set a long value in the preferences editor, to be written back once
+     * {@link #commit} or {@link #apply} are called.
      *
-     * <p>Note that you <em>must not</em> modify the set instance returned
-     * by this call.  The consistency of the stored data is not guaranteed
-     * if you do, nor is your ability to modify the instance at all.
-     *
-     * @param key The name of the preference to retrieve.
-     * @param defValues Values to return if this preference does not exist.
-     * @return Returns the preference values if they exist, or defValues.
-     * Throws ClassCastException if there is a preference with this name
-     * that is not a Set.
+     * @param key The name of the preference to modify.
+     * @param value The new value for the preference.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    Set<String> getStringSet(String key, Set<String> defValues);
+    Editor putLong(String key, long value);
 
     /**
-     * Retrieve an int value from the preferences.
+     * Set a float value in the preferences editor, to be written back once
+     * {@link #commit} or {@link #apply} are called.
      *
-     * @param key The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * an int.
+     * @param key The name of the preference to modify.
+     * @param value The new value for the preference.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    int getInt(String key, int defValue);
+    Editor putFloat(String key, float value);
 
     /**
-     * Retrieve a long value from the preferences.
+     * Set a boolean value in the preferences editor, to be written back
+     * once {@link #commit} or {@link #apply} are called.
      *
-     * @param key The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a long.
+     * @param key The name of the preference to modify.
+     * @param value The new value for the preference.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    long getLong(String key, long defValue);
+    Editor putBoolean(String key, boolean value);
 
     /**
-     * Retrieve a float value from the preferences.
+     * Mark in the editor that a preference value should be removed, which
+     * will be done in the actual preferences once {@link #commit} is
+     * called.
      *
-     * @param key The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a float.
+     * <p>Note that when committing back to the preferences, all removals
+     * are done first, regardless of whether you called remove before
+     * or after put methods on this editor.
+     *
+     * @param key The name of the preference to remove.
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    float getFloat(String key, float defValue);
+    Editor remove(String key);
 
     /**
-     * Retrieve a boolean value from the preferences.
+     * Mark in the editor to remove <em>all</em> values from the
+     * preferences.  Once commit is called, the only remaining preferences
+     * will be any that you have defined in this editor.
      *
-     * @param key The name of the preference to retrieve.
-     * @param defValue Value to return if this preference does not exist.
-     * @return Returns the preference value if it exists, or defValue.  Throws
-     * ClassCastException if there is a preference with this name that is not
-     * a boolean.
+     * <p>Note that when committing back to the preferences, the clear
+     * is done first, regardless of whether you called clear before
+     * or after put methods on this editor.
+     *
+     * @return Returns a reference to the same Editor object, so you can
+     * chain put calls together.
      */
-    boolean getBoolean(String key, boolean defValue);
+    Editor clear();
 
     /**
-     * Checks whether the preferences contains a preference.
+     * Commit your preferences changes back from this Editor to the
+     * {@link SharedPreferences} object it is editing.  This atomically
+     * performs the requested modifications, replacing whatever is currently
+     * in the SharedPreferences.
      *
-     * @param key The name of the preference to check.
-     * @return Returns true if the preference exists in the preferences,
-     * otherwise false.
+     * <p>Note that when two editors are modifying preferences at the same
+     * time, the last one to call commit wins.
+     *
+     * <p>If you don't care about the return value and you're
+     * using this from your application's main thread, consider
+     * using {@link #apply} instead.
+     *
+     * @return Returns true if the new values were successfully written
+     * to persistent storage.
      */
-    boolean contains(String key);
+    boolean commit();
 
     /**
-     * Create a new Editor for these preferences, through which you can make
-     * modifications to the data in the preferences and atomically commit those
-     * changes back to the SharedPreferences object.
+     * Commit your preferences changes back from this Editor to the
+     * {@link SharedPreferences} object it is editing.  This atomically
+     * performs the requested modifications, replacing whatever is currently
+     * in the SharedPreferences.
      *
-     * <p>Note that you <em>must</em> call {@link Editor#commit} to have any
-     * changes you perform in the Editor actually show up in the
-     * SharedPreferences.
+     * <p>Note that when two editors are modifying preferences at the same
+     * time, the last one to call apply wins.
      *
-     * @return Returns a new instance of the {@link Editor} interface, allowing
-     * you to modify the values in this SharedPreferences object.
+     * <p>Unlike {@link #commit}, which writes its preferences out
+     * to persistent storage synchronously, {@link #apply}
+     * commits its changes to the in-memory
+     * {@link SharedPreferences} immediately but starts an
+     * asynchronous commit to disk and you won't be notified of
+     * any failures.  If another editor on this
+     * {@link SharedPreferences} does a regular {@link #commit}
+     * while a {@link #apply} is still outstanding, the
+     * {@link #commit} will block until all async commits are
+     * completed as well as the commit itself.
+     *
+     * <p>As {@link SharedPreferences} instances are singletons within
+     * a process, it's safe to replace any instance of {@link #commit} with
+     * {@link #apply} if you were already ignoring the return value.
+     *
+     * <p>You don't need to worry about Android component
+     * lifecycles and their interaction with <code>apply()</code>
+     * writing to disk.  The framework makes sure in-flight disk
+     * writes from <code>apply()</code> complete before switching
+     * states.
+     *
+     * <p class='note'>The SharedPreferences.Editor interface
+     * isn't expected to be implemented directly.  However, if you
+     * previously did implement it and are now getting errors
+     * about missing <code>apply()</code>, you can simply call
+     * {@link #commit} from <code>apply()</code>.
      */
-    Editor edit();
+    void apply();
+  }
 
-    /**
-     * Registers a callback to be invoked when a change happens to a preference.
-     *
-     * <p class="caution"><strong>Caution:</strong> The preference manager does
-     * not currently store a strong reference to the listener. You must store a
-     * strong reference to the listener, or it will be susceptible to garbage
-     * collection. We recommend you keep a reference to the listener in the
-     * instance data of an object that will exist as long as you need the
-     * listener.</p>
-     *
-     * @param listener The callback that will run.
-     * @see #unregisterOnSharedPreferenceChangeListener
-     */
-    void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener);
+  /**
+   * Retrieve all values from the preferences.
+   *
+   * <p>Note that you <em>must not</em> modify the collection returned
+   * by this method, or alter any of its contents.  The consistency of your
+   * stored data is not guaranteed if you do.
+   *
+   * @return Returns a map containing a list of pairs key/value representing
+   * the preferences.
+   */
+  Map<String, ?> getAll();
 
-    /**
-     * Unregisters a previous callback.
-     *
-     * @param listener The callback that should be unregistered.
-     * @see #registerOnSharedPreferenceChangeListener
-     */
-    void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener);
+  /**
+   * Retrieve a String value from the preferences.
+   *
+   * @param key The name of the preference to retrieve.
+   * @param defValue Value to return if this preference does not exist.
+   * @return Returns the preference value if it exists, or defValue.  Throws
+   * ClassCastException if there is a preference with this name that is not
+   * a String.
+   */
+  String getString(String key, String defValue);
+
+  /**
+   * Retrieve a set of String values from the preferences.
+   *
+   * <p>Note that you <em>must not</em> modify the set instance returned
+   * by this call.  The consistency of the stored data is not guaranteed
+   * if you do, nor is your ability to modify the instance at all.
+   *
+   * @param key The name of the preference to retrieve.
+   * @param defValues Values to return if this preference does not exist.
+   * @return Returns the preference values if they exist, or defValues.
+   * Throws ClassCastException if there is a preference with this name
+   * that is not a Set.
+   */
+  Set<String> getStringSet(String key, Set<String> defValues);
+
+  /**
+   * Retrieve an int value from the preferences.
+   *
+   * @param key The name of the preference to retrieve.
+   * @param defValue Value to return if this preference does not exist.
+   * @return Returns the preference value if it exists, or defValue.  Throws
+   * ClassCastException if there is a preference with this name that is not
+   * an int.
+   */
+  int getInt(String key, int defValue);
+
+  /**
+   * Retrieve a long value from the preferences.
+   *
+   * @param key The name of the preference to retrieve.
+   * @param defValue Value to return if this preference does not exist.
+   * @return Returns the preference value if it exists, or defValue.  Throws
+   * ClassCastException if there is a preference with this name that is not
+   * a long.
+   */
+  long getLong(String key, long defValue);
+
+  /**
+   * Retrieve a float value from the preferences.
+   *
+   * @param key The name of the preference to retrieve.
+   * @param defValue Value to return if this preference does not exist.
+   * @return Returns the preference value if it exists, or defValue.  Throws
+   * ClassCastException if there is a preference with this name that is not
+   * a float.
+   */
+  float getFloat(String key, float defValue);
+
+  /**
+   * Retrieve a boolean value from the preferences.
+   *
+   * @param key The name of the preference to retrieve.
+   * @param defValue Value to return if this preference does not exist.
+   * @return Returns the preference value if it exists, or defValue.  Throws
+   * ClassCastException if there is a preference with this name that is not
+   * a boolean.
+   */
+  boolean getBoolean(String key, boolean defValue);
+
+  /**
+   * Checks whether the preferences contains a preference.
+   *
+   * @param key The name of the preference to check.
+   * @return Returns true if the preference exists in the preferences,
+   * otherwise false.
+   */
+  boolean contains(String key);
+
+  /**
+   * Create a new Editor for these preferences, through which you can make
+   * modifications to the data in the preferences and atomically commit those
+   * changes back to the SharedPreferences object.
+   *
+   * <p>Note that you <em>must</em> call {@link Editor#commit} to have any
+   * changes you perform in the Editor actually show up in the
+   * SharedPreferences.
+   *
+   * @return Returns a new instance of the {@link Editor} interface, allowing
+   * you to modify the values in this SharedPreferences object.
+   */
+  Editor edit();
+
+  /**
+   * Registers a callback to be invoked when a change happens to a preference.
+   *
+   * <p class="caution"><strong>Caution:</strong> The preference manager does
+   * not currently store a strong reference to the listener. You must store a
+   * strong reference to the listener, or it will be susceptible to garbage
+   * collection. We recommend you keep a reference to the listener in the
+   * instance data of an object that will exist as long as you need the
+   * listener.</p>
+   *
+   * @param listener The callback that will run.
+   * @see #unregisterOnSharedPreferenceChangeListener
+   */
+  void registerOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener);
+
+  /**
+   * Unregisters a previous callback.
+   *
+   * @param listener The callback that should be unregistered.
+   * @see #registerOnSharedPreferenceChangeListener
+   */
+  void unregisterOnSharedPreferenceChangeListener(OnSharedPreferenceChangeListener listener);
 }

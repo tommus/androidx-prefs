@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <!-- region Theme -->
+
+  <color name="colorPrimary">#64CDF5</color>
+  <color name="colorPrimaryDark">#1F9CC2</color>
+  <color name="colorAccent">#F85FCA</color>
+
+  <!-- endregion -->
+
+</resources>
