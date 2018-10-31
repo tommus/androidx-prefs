@@ -1,1 +1,4 @@
-include ':sample', ':prefs-compiler', ':prefs', ':android-sharedpreferences'
+include ":sample"
+include ":prefs-compiler"
+include ":prefs"
+include ":android-sharedpreferences"
