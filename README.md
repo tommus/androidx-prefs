@@ -1,89 +1,108 @@
-Prefs
-===
+# AndroidX Preferences
 
-This little tool generates wrappers for your SharedPreferences, so you can benefit from compile time
-verification and code completion in your IDE.  You also get nice singletons for free.
+This library uses annotation processing to ensure the compile time verification for user-defined shared preferences.
 
-Usage
----
+## Usage
 
-### 1/ Add the dependencies to your project
+1. Add Jitpack repository address to the project `build.gradle`:
+
+```groovy
+repositories {
+    /* (...) */
+    maven { url "https://jitpack.io" }
+}
+```
+
+2. Add dependencies.
+
+To the *Java-based* project:
 
 ```groovy
 dependencies {
-    /* ... */
-    annotationProcessor 'org.jraf:prefs-compiler:1.2.2' // or kapt if you use Kotlin
-    implementation 'org.jraf:prefs:1.2.2'
+    /* (...) */
+    implementation "com.github.tommus.androidx-prefs:androidx-preferences:1.0.0"
+    annotationProcessor "com.github.tommus.androidx-prefs:androidx-preferences-compiler:1.0.0"
 }
 ```
 
+To the *Kotlin-based* project:
 
-### 2/ Define your preferences
+```groovy
+dependencies {
+    /* (...) */
+    implementation "com.github.tommus.androidx-prefs:androidx-preferences:1.0.0"
+    kapt "com.github.tommus.androidx-prefs:androidx-preferences-compiler:1.0.0"
+}
+```
 
-Use the `@Prefs` annotation on any plain old Java object.  All its (non static) fields will be considered a preference.
+3. Define shared preferences.
 
-For instance:
+Use the `@Prefs` annotation on any POJO. All (non static) fields will be considered a preference.
+
+For example:
 
 ```java
-@Prefs
-public class Main {
-    /**
-     * User login.
-     */
-    String login;
+@Prefs(value = "UserCachePreferences", fileMode = MODE_PRIVATE)
+public class UserCache {
 
-    /**
-     * User password.
-     */
+    //region Basic
+
+    @DefaultLong(0L)
+    Long id;
+
+    @DefaultString("")
+    String firstName;
+
+    @DefaultString("")
+    String lastName;
+
+    @DefaultString("")
     String password;
 
-    @DefaultBoolean(false)
-    Boolean isPremium;
+    @DefaultBoolean(true)
+    Boolean active;
 
-    @Name("PREF_AGE")
-    Integer age;
+    //endregion
 }
 ```
 
-Currently, the accepted types are:
-- Boolean
-- Float
-- Integer
-- Long
-- String
-- Set\<String\>
+Accepted shared preference field types are:
 
-Optionally, use `@DefaultXxx` and `@Name` annotations (the default default is `null`, and the default name is the name of your field).
+* Boolean
+* Float
+* Integer
+* Long
+* String
+* Set\<String\>
 
-You can pass a file name and mode (as per [Context.getSharedPreference()](http://developer.android.com/reference/android/content/Context.html#getSharedPreferences(java.lang.String, int))) like this:
-```java
-@Prefs(fileName = "settings", fileMode = Context.MODE_PRIVATE)
-```
-
-If you don't, `PreferenceManager.getDefaultSharedPreferences(Context)` will be used.
-
-
-### 3/ Be a winner!
+3. Use generated wrapper class.
 
 A class named `<YourClassName>Prefs` will be generated in the same package (at compile time).  Use it like this:
 
 ```java
-        MainPrefs mainPrefs = MainPrefs.get(this);
+    final UserCachePrefs cache = UserCachePrefs.get(this);
 
-        // Put a single value (apply() is automatically called)
-        mainPrefs.putAge(42);
+    // Put a single value (apply() is automatically called).
+    cache
+      .putId(1L);
 
-        // Put several values in one transaction
-        mainPrefs.edit().putLogin("john").putPassword("p4Ssw0Rd").apply();
+    // Put several values in one transaction.
+    cache
+      .edit()
+      .putFirstName("John")
+      .putLastName("Snow")
+      .putPassword("WinterIsComing")
+      .putActive(true)
+      .apply();
 
-        // Check if a value is set
-        if (mainPrefs.containsLogin()) doSomething();
+    // Check if a value is set.
+    if (cache.containsFirstName()) {
+      doSomething();
+    };
 
-        // Remove a value
-        mainPrefs.removeAge();
-        // Or (this has the same effect)
-        mainPrefs.putAge(null);
+    // Remove a value.
+    cache.removeFirstName();
 
-        // Clear all values!
-        mainPrefs.clear();
+    // Clear all preferences.
+    cache.clear();
 ```
