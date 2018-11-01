@@ -150,7 +150,7 @@ public class PrefsProcessor extends AbstractProcessor {
           // SharedPreferencesWrapper
           javaFileObject =
             processingEnv.getFiler().createSourceFile(classElement.getQualifiedName() + SUFFIX_PREF_WRAPPER);
-          Template template = getFreemarkerConfiguration().getTemplate("prefwrapper.ftl");
+          Template template = getFreemarkerConfiguration().getTemplate("shared_preferences_wrapper.ftl");
           Writer writer = javaFileObject.openWriter();
           template.process(args, writer);
           IOUtils.closeQuietly(writer);
@@ -158,7 +158,7 @@ public class PrefsProcessor extends AbstractProcessor {
           // EditorWrapper
           javaFileObject =
             processingEnv.getFiler().createSourceFile(classElement.getQualifiedName() + SUFFIX_EDITOR_WRAPPER);
-          template = getFreemarkerConfiguration().getTemplate("editorwrapper.ftl");
+          template = getFreemarkerConfiguration().getTemplate("editor_wrapper.ftl");
           writer = javaFileObject.openWriter();
           template.process(args, writer);
           IOUtils.closeQuietly(writer);
