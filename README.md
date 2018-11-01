@@ -75,7 +75,7 @@ Accepted shared preference field types are:
 * String
 * Set\<String\>
 
-3. Use generated wrapper class.
+4. Use generated wrapper class.
 
 A class named `<YourClassName>Prefs` will be generated in the same package (at compile time).  Use it like this:
 
