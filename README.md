@@ -15,23 +15,34 @@ repositories {
 
 2. Add dependencies.
 
-To the *Java-based* project:
+
+Make sure that you have the ```$androidx_preferences_version``` defined in your gradle file at the project level:
+
+```groovy
+ext.androidx_preferences_version = "1.0.1"
+```
+
+Add dependencies to the *Java-based* project:
 
 ```groovy
 dependencies {
-    /* (...) */
-    implementation "com.github.tommus.androidx-prefs:androidx-preferences:1.0.0"
-    annotationProcessor "com.github.tommus.androidx-prefs:androidx-preferences-compiler:1.0.0"
+    // AndroidX Preferences annotations.
+    implementation "com.github.tommus.androidx-prefs:androidx-preferences:$androidx_preferences_version"
+
+    // AndroidX Preferences annotation processor.
+    annotationProcessor "com.github.tommus.androidx-prefs:androidx-preferences-compiler:$androidx_preferences_version"
 }
 ```
 
-To the *Kotlin-based* project:
+Add dependencies to the *Kotlin-based* project:
 
 ```groovy
 dependencies {
-    /* (...) */
-    implementation "com.github.tommus.androidx-prefs:androidx-preferences:1.0.0"
-    kapt "com.github.tommus.androidx-prefs:androidx-preferences-compiler:1.0.0"
+    // AndroidX Preferences annotations.
+    implementation "com.github.tommus.androidx-prefs:androidx-preferences:$androidx_preferences_version"
+
+    // AndroidX Preferences annotation processor.
+    kapt "com.github.tommus.androidx-prefs:androidx-preferences-compiler:$androidx_preferences_version"
 }
 ```
 
