@@ -1,5 +1,9 @@
 ## Change Log
 
+### AndroidX Preferences 1.0.4 *(2018-11-02)*
+
+  * Correct Jitpack multi-module configuration.
+
 ### AndroidX Preferences 1.0.3 *(2018-11-02)*
 
  * Correct Jitpack multi-module configuration.

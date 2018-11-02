@@ -1,6 +1,7 @@
 //region Startup Plugins
 
 apply plugin: "java-library"
+apply plugin: "com.github.dcendents.android-maven"
 
 //endregion
 
@@ -29,5 +30,11 @@ dependencies {
 
   //endregion
 }
+
+//endregion
+
+//region Publication
+
+group = "com.github.tommus.androidx-prefs"
 
 //endregion
