@@ -7,6 +7,7 @@ buildscript {
   }
   dependencies {
     classpath deps.build.android_gradle_plugin
+    classpath deps.build.android_maven_gradle_plugin
   }
 }
 

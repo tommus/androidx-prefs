@@ -19,7 +19,7 @@ repositories {
 Make sure that you have the ```$androidx_preferences_version``` defined in your gradle file at the project level:
 
 ```groovy
-ext.androidx_preferences_version = "1.0.2"
+ext.androidx_preferences_version = "1.0.3"
 ```
 
 Add dependencies to the *Java-based* project:

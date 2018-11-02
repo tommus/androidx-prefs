@@ -1,6 +1,7 @@
 //region Startup Plugins
 
 apply plugin: "java-library"
+apply plugin: "com.github.dcendents.android-maven"
 
 //endregion
 
@@ -8,5 +9,11 @@ apply plugin: "java-library"
 
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
+
+//endregion
+
+//region Publication
+
+group = "com.github.tommus.androidx-prefs"
 
 //endregion
