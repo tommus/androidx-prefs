@@ -1,0 +1,12 @@
+//region Startup Plugins
+
+apply plugin: "java-library"
+
+//endregion
+
+//region Compatibility
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+//endregion

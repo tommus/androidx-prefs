@@ -1,13 +1,13 @@
 package co.windly.androidxprefs.compiler;
 
-import co.windly.androidxprefs.annotation.DefaultBoolean;
-import co.windly.androidxprefs.annotation.DefaultFloat;
-import co.windly.androidxprefs.annotation.DefaultInt;
-import co.windly.androidxprefs.annotation.DefaultLong;
-import co.windly.androidxprefs.annotation.DefaultString;
-import co.windly.androidxprefs.annotation.DefaultStringSet;
-import co.windly.androidxprefs.annotation.Name;
-import co.windly.androidxprefs.annotation.Prefs;
+import co.windly.androidxprefs.annotations.DefaultBoolean;
+import co.windly.androidxprefs.annotations.DefaultFloat;
+import co.windly.androidxprefs.annotations.DefaultInt;
+import co.windly.androidxprefs.annotations.DefaultLong;
+import co.windly.androidxprefs.annotations.DefaultString;
+import co.windly.androidxprefs.annotations.DefaultStringSet;
+import co.windly.androidxprefs.annotations.Name;
+import co.windly.androidxprefs.annotations.Prefs;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
@@ -34,15 +34,15 @@ import javax.tools.JavaFileObject;
 import org.apache.commons.io.IOUtils;
 
 @SupportedAnnotationTypes({
-  "co.windly.androidxprefs.annotation.DefaultBoolean",
-  "co.windly.androidxprefs.annotation.DefaultFloat",
-  "co.windly.androidxprefs.annotation.DefaultInt",
-  "co.windly.androidxprefs.annotation.DefaultLong",
-  "co.windly.androidxprefs.annotation.DefaultString",
-  "co.windly.androidxprefs.annotation.DefaultStringSet",
-  "co.windly.androidxprefs.annotation.Mode",
-  "co.windly.androidxprefs.annotation.Name",
-  "co.windly.androidxprefs.annotation.Prefs"
+  "co.windly.androidxprefs.annotations.DefaultBoolean",
+  "co.windly.androidxprefs.annotations.DefaultFloat",
+  "co.windly.androidxprefs.annotations.DefaultInt",
+  "co.windly.androidxprefs.annotations.DefaultLong",
+  "co.windly.androidxprefs.annotations.DefaultString",
+  "co.windly.androidxprefs.annotations.DefaultStringSet",
+  "co.windly.androidxprefs.annotations.Mode",
+  "co.windly.androidxprefs.annotations.Name",
+  "co.windly.androidxprefs.annotations.Prefs"
 })
 public class PrefsProcessor extends AbstractProcessor {
 
@@ -68,7 +68,7 @@ public class PrefsProcessor extends AbstractProcessor {
   @Override
   public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
     for (TypeElement annotation : annotations) {
-      if (!annotation.getQualifiedName().contentEquals("co.windly.androidxprefs.annotation.Prefs")) {
+      if (!annotation.getQualifiedName().contentEquals("co.windly.androidxprefs.annotations.Prefs")) {
         // Should never happen - but does with kapt :)
         continue;
       }

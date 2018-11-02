@@ -31,16 +31,15 @@ android {
 
   //region Compile Options
 
-  compileSdkVersion 28
-  buildToolsVersion "28.0.3"
+  compileSdkVersion deps.build_versions.compile_sdk
 
   //endregion
 
   //region Default Config
 
   defaultConfig {
-    minSdkVersion 14
-    targetSdkVersion 28
+    minSdkVersion deps.build_versions.min_sdk
+    targetSdkVersion deps.build_versions.target_sdk
     applicationId "co.windly.androidxprefs.sample"
   }
 
@@ -60,15 +59,9 @@ dependencies {
 
   //endregion
 
-  //region AndroidX
-
-  implementation "androidx.annotation:annotation:1.0.0"
-
-  //endregion
-
   //region Material
 
-  implementation "com.google.android.material:material:1.0.0"
+  implementation deps.ui.material
 
   //endregion
 }

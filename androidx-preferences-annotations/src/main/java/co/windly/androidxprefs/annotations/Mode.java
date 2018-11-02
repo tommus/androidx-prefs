@@ -1,13 +1,13 @@
-package co.windly.androidxprefs.annotation;
+package co.windly.androidxprefs.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DefaultBoolean {
+public @interface Mode {
 
-  boolean value();
+  int value();
 }

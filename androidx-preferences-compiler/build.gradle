@@ -1,50 +1,13 @@
 //region Startup Plugins
 
-apply plugin: "java"
-apply plugin: "maven"
+apply plugin: "java-library"
 
 //endregion
 
 //region Compatibility
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
-
-//endregion
-
-//region Versioning
-
-group = "co.windly.androidxprefs"
-version = "1.0.1"
-
-//endregion
-
-//region Documentation
-
-javadoc.failOnError = false
-
-//endregion
-
-//region Tasks
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-  classifier = "sources"
-  from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = "javadoc"
-  from javadoc.destinationDir
-}
-
-//endregion
-
-//region Artifacts
-
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
 
 //endregion
 
@@ -54,15 +17,15 @@ dependencies {
 
   //region Application Modules
 
-  implementation project(":androidx-preferences")
+  implementation project(":androidx-preferences-annotations")
 
   //endregion
 
   //region Miscellaneous
 
-  implementation "org.freemarker:freemarker:2.3.26-incubating"
-  implementation "commons-io:commons-io:2.5"
-  implementation "org.apache.commons:commons-lang3:3.8.1"
+  implementation deps.template.freemarker
+  implementation deps.misc.commons_io
+  implementation deps.misc.commons_lang
 
   //endregion
 }

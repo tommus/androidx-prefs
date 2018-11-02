@@ -108,8 +108,18 @@ A class named `<YourClassName>Prefs` will be generated in the same package (at c
 
     // Check if a value is set.
     if (cache.containsFirstName()) {
-      doSomething();
+      Log.d(TAG, "First name is set.");
     };
+
+    // Access preferences one by one.
+    Log.d(TAG, "id -> " + cache.getId());
+    Log.d(TAG, "first name -> " + cache.getFirstName());
+    Log.d(TAG, "last name -> " + cache.getLastName());
+    Log.d(TAG, "password -> " + cache.getPassword());
+    Log.d(TAG, "active -> " + cache.isActive());
+
+    // Access all preferences.
+    Log.d(TAG, "cache -> " + cache.getAll());
 
     // Remove a value.
     cache.removeFirstName();

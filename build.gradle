@@ -2,13 +2,11 @@
 
 buildscript {
   repositories {
-    google()
-    jcenter()
-    mavenCentral()
+    apply from: "versions.gradle"
+    addRepos(repositories)
   }
   dependencies {
-    classpath "com.android.tools.build:gradle:3.2.1"
-    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+    classpath deps.build.android_gradle_plugin
   }
 }
 
@@ -18,28 +16,7 @@ buildscript {
 
 allprojects {
   repositories {
-    google()
-    jcenter()
-    mavenLocal()
-  }
-}
-
-//endregion
-
-//region Versioning
-
-apply plugin: "com.github.ben-manes.versions"
-
-dependencyUpdates.resolutionStrategy = {
-  componentSelection { rules ->
-    rules.all { selection ->
-      boolean rejected = [/*"alpha", "beta",*/ "rc", "20181031"].any {
-        qualifier -> selection.candidate.version.toLowerCase() ==~ /.*-${qualifier}.*/
-      }
-      if (rejected) {
-        selection.reject("Release candidate")
-      }
-    }
+    addRepos(repositories)
   }
 }
 

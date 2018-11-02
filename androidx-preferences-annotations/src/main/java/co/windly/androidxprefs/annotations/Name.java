@@ -1,4 +1,4 @@
-package co.windly.androidxprefs.annotation;
+package co.windly.androidxprefs.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

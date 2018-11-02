@@ -5,57 +5,69 @@ import java.util.Set;
 
 public class EditorWrapper implements SharedPreferences.Editor {
 
-  private final SharedPreferences.Editor mWrapped;
+  //region Editor
+
+  private final SharedPreferences.Editor editor;
+
+  //endregion
+
+  //region Constructor
 
   public EditorWrapper(SharedPreferences.Editor wrapped) {
-    mWrapped = wrapped;
+    editor = wrapped;
   }
 
+  //endregion
+
+  //region Interface
+
   public EditorWrapper putString(String key, String value) {
-    mWrapped.putString(key, value);
+    editor.putString(key, value);
     return this;
   }
 
   public EditorWrapper putStringSet(String key, Set<String> values) {
-    mWrapped.putStringSet(key, values);
+    editor.putStringSet(key, values);
     return this;
   }
 
   public EditorWrapper putInt(String key, int value) {
-    mWrapped.putInt(key, value);
+    editor.putInt(key, value);
     return this;
   }
 
   public EditorWrapper putLong(String key, long value) {
-    mWrapped.putLong(key, value);
+    editor.putLong(key, value);
     return this;
   }
 
   public EditorWrapper putFloat(String key, float value) {
-    mWrapped.putFloat(key, value);
+    editor.putFloat(key, value);
     return this;
   }
 
   public EditorWrapper putBoolean(String key, boolean value) {
-    mWrapped.putBoolean(key, value);
+    editor.putBoolean(key, value);
     return this;
   }
 
   public EditorWrapper remove(String key) {
-    mWrapped.remove(key);
+    editor.remove(key);
     return this;
   }
 
   public EditorWrapper clear() {
-    mWrapped.clear();
+    editor.clear();
     return this;
   }
 
   public boolean commit() {
-    return mWrapped.commit();
+    return editor.commit();
   }
 
   public void apply() {
-    mWrapped.apply();
+    editor.apply();
   }
+
+  //endregion
 }

@@ -1,4 +1,5 @@
-include ":sample-android-java"
-include ":androidx-preferences-compiler"
+include ":androidx-preferences-annotations"
+include ":androidx-preferences-runtime"
 include ":androidx-preferences"
-include ":android-sharedpreferences"
+include ":androidx-preferences-compiler"
+include ":sample-android-java"

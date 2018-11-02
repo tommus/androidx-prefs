@@ -12,6 +12,11 @@ android {
 
   compileSdkVersion deps.build_versions.compile_sdk
 
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_6
+    targetCompatibility JavaVersion.VERSION_1_6
+  }
+
   //endregion
 
   //region Default Config
@@ -19,18 +24,31 @@ android {
   defaultConfig {
     minSdkVersion deps.build_versions.min_sdk
     targetSdkVersion deps.build_versions.target_sdk
+    javaCompileOptions {
+      annotationProcessorOptions {
+        includeCompileClasspath = true
+      }
+    }
   }
 
   //endregion
 }
 
+//endregion
+
 //region Dependencies
 
 dependencies {
 
-  //region Library Modules
+  //region Application Modules
 
-  api project(":androidx-preferences-runtime")
+  api project(":androidx-preferences-annotations")
+
+  //endregion
+
+  //region Android Runtime
+
+  compileOnly deps.android.runtime
 
   //endregion
 }
