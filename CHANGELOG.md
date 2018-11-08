@@ -1,5 +1,9 @@
 ## Change Log
 
+### AndroidX Preferences 1.0.5 *(2018-11-08)*
+
+  * Configure Maven Central release process.
+
 ### AndroidX Preferences 1.0.4 *(2018-11-02)*
 
   * Correct Jitpack multi-module configuration.

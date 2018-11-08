@@ -7,7 +7,6 @@ buildscript {
   }
   dependencies {
     classpath deps.build.android_gradle_plugin
-    classpath deps.build.android_maven_gradle_plugin
   }
 }
 
@@ -19,6 +18,15 @@ allprojects {
   repositories {
     addRepos(repositories)
   }
+}
+
+//endregion
+
+//region Sub Projects
+
+subprojects { project ->
+  group = GROUP
+  version = VERSION_NAME
 }
 
 //endregion

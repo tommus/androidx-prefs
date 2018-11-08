@@ -4,33 +4,14 @@ This library uses annotation processing to ensure the compile time verification 
 
 ## Usage
 
-1. Add Jitpack repository address to the project `build.gradle`:
-
-```groovy
-repositories {
-    /* (...) */
-    maven { url "https://jitpack.io" }
-}
-```
-
-2. Add dependencies.
-
-
-Make sure that you have the ```$androidx_preferences_version``` defined in your gradle file at the project level:
-
-```groovy
-ext.androidx_preferences_version = "1.0.4"
-```
+1. Add dependencies.
 
 Add dependencies to the *Java-based* project:
 
 ```groovy
 dependencies {
-    // AndroidX Preferences annotations.
-    implementation "com.github.tommus.androidx-prefs:androidx-preferences:$androidx_preferences_version"
-
-    // AndroidX Preferences annotation processor.
-    annotationProcessor "com.github.tommus.androidx-prefs:androidx-preferences-compiler:$androidx_preferences_version"
+    implementation "co.windly:androidx-preferences:1.0.5"
+    annotationProcessor "co.windly:androidx-preferences-compiler:1.0.5"
 }
 ```
 
@@ -38,11 +19,8 @@ Add dependencies to the *Kotlin-based* project:
 
 ```groovy
 dependencies {
-    // AndroidX Preferences annotations.
-    implementation "com.github.tommus.androidx-prefs:androidx-preferences:$androidx_preferences_version"
-
-    // AndroidX Preferences annotation processor.
-    kapt "com.github.tommus.androidx-prefs:androidx-preferences-compiler:$androidx_preferences_version"
+    implementation "co.windly:androidx-preferences:1.0.5"
+    kapt "co.windly:androidx-preferences-compiler:1.0.5"
 }
 ```
 
