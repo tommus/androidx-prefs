@@ -1,5 +1,10 @@
 ## Change Log
 
+### AndroidX Preferences 1.0.6 *(2018-11-09)*
+
+  * Simplify compiler source code;
+  * Drop usage of deprecated IOUtils.closeQuietly().
+
 ### AndroidX Preferences 1.0.5 *(2018-11-08)*
 
   * Configure Maven Central release process.

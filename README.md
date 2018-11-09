@@ -10,8 +10,8 @@ Add dependencies to the *Java-based* project:
 
 ```groovy
 dependencies {
-    implementation "co.windly:androidxpreferences:1.0.5"
-    annotationProcessor "co.windly:androidxpreferences-compiler:1.0.5"
+    implementation "co.windly:androidxpreferences:1.0.6"
+    annotationProcessor "co.windly:androidxpreferences-compiler:1.0.6"
 }
 ```
 
@@ -19,8 +19,8 @@ Add dependencies to the *Kotlin-based* project:
 
 ```groovy
 dependencies {
-    implementation "co.windly:androidxpreferences:1.0.5"
-    kapt "co.windly:androidxpreferences-compiler:1.0.5"
+    implementation "co.windly:androidxpreferences:1.0.6"
+    kapt "co.windly:androidxpreferences-compiler:1.0.6"
 }
 ```
 
